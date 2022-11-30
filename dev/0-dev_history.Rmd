@@ -31,7 +31,9 @@ usethis::use_mit_license("Paúl Ponce")
 # Start using git
 
 ```{r, eval=FALSE}
-usethis::use_git()
+usethis::use_git_remote("origin", 
+                        url = "https://github.com/training-unhcr-n2/squirrelspaul.git",
+                        overwrite = TRUE)
 # Deal with classical files to ignore
 usethis::git_vaccinate()
 # Use main for primary branch

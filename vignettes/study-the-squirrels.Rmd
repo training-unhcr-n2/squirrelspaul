@@ -38,8 +38,39 @@ You can get a message with the fur color of interest with `get_message_fur_color
 get_message_fur_color(primary_fur_color = "Cinnamon")
 ```
 
-  
 
+# Study activity
+
+This function asses whether the data is correct and includes the column with the primary fur color of each squirrel. Then, generates a table and a graph.
+
+```{r eval=FALSE}
+study_activity <- function(df_squirrels_act, col_primary_fur_color) {
   
+  stopifnot(is.data.frame(df_squirrels_act))
+  stopifnot(is.character(col_primary_fur_color))
+  
+  table <- df_squirrels_act %>% 
+    filter(col_primary_fur_color == primary_fur_color)
+    
+  graph <- table %>% 
+    ggplot() +
+    aes(x = activity, y = counts, fill = age) +
+    geom_col() +
+    labs(x = "Type of activity",
+         y = "Number of observations",
+         title = glue("Type of activity by age for {tolower(col_primary_fur_color)} squirrels")) +
+    scale_fill_manual(name = "Age",
+                      values = c("#00688B", "#00BFFF"))
+  
+  return(list(table = table, graph = graph))
+}
+```
+
+
+```{r eval=FALSE}
+data(data_act_squirrels)
+study_activity(df_squirrels_act = data_act_squirrels, 
+               col_primary_fur_color = "Gray")
+```  
 
 
